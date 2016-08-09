@@ -22,7 +22,18 @@ CSV=`~/interop/bin/summary "${PATH}"`
 PATH=/u/silioukhina/bin/node-v6.2.0-linux-x64/bin:$PATH node ~/illumina-report/illuminaToJSON.js "${CSV}" "${RUN}" > this_should_work.json
 
 ```
+---
+### Testing
+Unit.js was used for testing the illuminaToJSON file to make sure the correct numbers are still retrieved when the illumina pp versions change
 
+Firstly, npm inistall unit.js and mocha. May need to create a node_modules directory for this
+
+Next, generate the summary file for the 150312_NS500507_0027_AH2KJ5AFXX test run and store it in a test/summaryData.csv file. This run is found in the basespace directory
+
+To run the tests, type npm test into the command line
+
+
+---
 ### Example
 Here is a sample part of the original illumina output:
 
