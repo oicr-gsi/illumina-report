@@ -1,5 +1,5 @@
 //input: illumina Summary data, run name
-
+var JSON = require('JSON');
 
 var dataVar = process.argv[2];
 var runVar = process.argv[3];
