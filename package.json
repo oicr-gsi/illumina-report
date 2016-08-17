@@ -10,6 +10,9 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "mocha": "~2.5.3"
+    "mocha": "~2.5.3",
+    "unit.js": "~2.0.0",
+    "fs": "~0.0.2",
+    "JSON": "~1.0.0"
   }
 }

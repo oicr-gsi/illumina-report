@@ -4,11 +4,17 @@ Using Illumina applications to retrieve data
 Illumina has produced code that converts interOp binary data into a cvs file. Here are the applications: http://illumina.github.io/interop/apps.html.
 
 ### installing
-these applications are c++ code, found in the interop/src/apps directory in their git: https://github.com/Illumina.
-To install this, go to http://illumina.github.io/interop/install.html and click "latest releases" under the Download Binary heading, then download the linux file. Type xdg-open INSTALL into the command line. The files that are to be run will be inside the bin directory.
+these applications are c++ code, found in the interop/src/apps directory in their git: https://github.com/Illumina
 
+To install this, go to http://illumina.github.io/interop/install.html and click "latest releases" under the Download Binary heading, then download the linux file. 
+Type into the command line:
+```
+tar xzf downloaded_file_name.tar.gz
+```
+The files that are to be run will be inside the bin directory.
+---
 ### How to run the file
-the summary tool sums up and averages the information. It is the one that is used for this script. The tool requires the path to the run report as an imput, and outputs results to the console. The output can be saved to a cvs file. illuminaToJSON.js takes a run name and this output to returns a json string. Here is a possible way to make the bash script for running the code:
+the summary tool sums up and averages the information. It is the one that is used for this script. The tool requires the path to the run report as an input, and outputs results to the console. The output can be saved to a cvs file. illuminaToJSON.js takes a run name and this output to returns a json string. Here is a possible way to make the bash script for running the code:
 
 ```
 
@@ -24,14 +30,18 @@ PATH=/u/silioukhina/bin/node-v6.2.0-linux-x64/bin:$PATH node ~/illumina-report/i
 ```
 ---
 ### Testing
-Unit.js was used for testing the illuminaToJSON file to make sure the correct numbers are still retrieved when the illumina pp versions change
+Unit.js was used for testing the illuminaToJSON file to make sure the correct numbers are still retrieved when the version of the illumina applications change
 
-Firstly, npm inistall unit.js and mocha. May need to create a node_modules directory for this
+Firstly, there is a test/summaryData.csv file that used version 1.0.8 of the illumina scripts to generate it. If you want to run the test on the new version, generate the summary file for the 150312_NS500507_0027_AH2KJ5AFXX test run and store it in place of this file. This run is found in the basespace directory under test data.
 
-Next, generate the summary file for the 150312_NS500507_0027_AH2KJ5AFXX test run and store it in a test/summaryData.csv file. This run is found in the basespace directory
+Next install the testing modules within package.json and then run the test:
 
-To run the tests, type npm test into the command line
+```
 
+npm install
+npm test
+```
+Expect to pass 5 tests
 
 ---
 ### Example
