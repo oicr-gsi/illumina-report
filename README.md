@@ -1,9 +1,9 @@
 Using Illumina applications to retrieve data
 ================
 
-Illumina has produced code that converts interOp binary data into a cvs file. Here are the applications: http://illumina.github.io/interop/apps.html.
+Illumina has produced code that converts interOp binary data into a csv file. Here are the applications: http://illumina.github.io/interop/apps.html.
 
-### installing
+### Installing
 these applications are c++ code, found in the interop/src/apps directory in their git: https://github.com/Illumina
 
 To install this, go to http://illumina.github.io/interop/install.html and click "latest releases" under the Download Binary heading, then download the linux file. 
@@ -12,9 +12,10 @@ Type into the command line:
 tar xzf downloaded_file_name.tar.gz
 ```
 The files that are to be run will be inside the bin directory.
+
 ---
-### How to run the file
-the summary tool sums up and averages the information. It is the one that is used for this script. The tool requires the path to the run report as an input, and outputs results to the console. The output can be saved to a cvs file. illuminaToJSON.js takes a run name and this output to returns a json string. Here is a possible way to make the bash script for running the code:
+### Running the file
+the summary tool sums up and averages the information. It is the one that is used for this script. The tool requires the path to the run report as an input, and outputs results to the console. The output can be saved to a csv file. illuminaToJSON.js takes a run name and this output to returns a json string. Here is a possible way to make the bash script for running the code:
 
 ```
 
