@@ -25,6 +25,7 @@
         "allowArrayStart": true,
         "allowArrayEnd": true
       }
-    ]
+    ],
+    "no-var": "error"
   }
 }

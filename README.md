@@ -1,4 +1,5 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Build Status](https://travis-ci.org/oicr-gsi/illumina-report.svg)](https://travis-ci.org/oicr-gsi/illumina-report)
 
 # Illumina Summary Report to JSON
 
@@ -58,4 +59,4 @@ npm test
 
 #### Dev notes
 
-This project uses
+This project uses [ESLint](https://github.com/eslint/eslint) for syntax error checking, [Prettier](https://github.com/prettier/prettier) for automatic formatting, and [Husky](https://github.com/typicode/husky) to run these before Git commits. Husky will also run tests before pushing to a Git remote.
