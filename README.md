@@ -1,127 +1,61 @@
-Using Illumina applications to retrieve data
-================
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-Illumina has produced code that converts interOp binary data into a cvs file. Here are the applications: http://illumina.github.io/interop/apps.html.
+# Illumina Summary Report to JSON
 
-### installing
-these applications are c++ code, found in the interop/src/apps directory in their git: https://github.com/Illumina
+This tool uses Illumina's InterOp `summary` application to produce a CSV summary of the InterOp binary data in a run directory, and ultimately processes that CSV into JSON.
 
-To install this, go to http://illumina.github.io/interop/install.html and click "latest releases" under the Download Binary heading, then download the linux file. 
-Type into the command line:
-```
-tar xzf downloaded_file_name.tar.gz
-```
-The files that are to be run will be inside the bin directory.
----
-### How to run the file
-the summary tool sums up and averages the information. It is the one that is used for this script. The tool requires the path to the run report as an input, and outputs results to the console. The output can be saved to a cvs file. illuminaToJSON.js takes a run name and this output to returns a json string. Here is a possible way to make the bash script for running the code:
+The `illumina_summary_tool` in this folder is identical to the `interop/bin/summary` tool from [version 1.1.2 of the Illumina tools](https://github.com/Illumina/interop/releases/tag/v1.1.2). Please note that as Illumina frequently changes their formatting, there is no guarantee that this script will work with other versions of the Illumina tools. If you wish to download a different version of the summary tool, please see `Installing the Illumina applications` below.
+
+### Install the dependencies
+
+Clone this repository then install the dependencies:
 
 ```
+$ npm install
+```
 
-#!/bin/bash
-set -euf -o pipefail
+### How to get JSON summary metrics from a run directory
 
-PATH=$1
-RUN=$2
+The `illumina_summary_tool` outputs its report in CSV format to STDOUT.
+The `illuminaCsvToJson.js` script takes one parameter, which can be either a file path for the saved output of using the `illumina_summary_tool`, or it can be the output of the summary tool itself.
 
-CSV=`~/interop/bin/summary "${PATH}"`
-PATH=/u/silioukhina/bin/node-v6.2.0-linux-x64/bin:$PATH node ~/illumina-report/illuminaToJSON.js "${CSV}" "${RUN}" > this_should_work.json
+First method (file path parameter):
 
 ```
----
+$ ./illumina_summary_tool /path/to/run/folder > /new/location/runSummary.csv
+$ node illuminaCsvToJson.js /new/location/runSummary.csv
+```
+
+Second method (summary tool output parameter):
+
+```
+$ node illuminaCsvToJson.js "$(./illumina_summary_tool /path/to/run/folder)"
+```
+
+In both cases, the `illuminaCsvToJson.js` script outputs its results to STDOUT.
+
+### Installing the Illumina applications
+
+The Illumina applications are c++ code, found in the interop/src/apps directory in their [GitHub repository](https://github.com/Illumina/interop).
+
+To install the version that this tool was developed for, go to [the v1.1.2 release](https://github.com/Illumina/interop/releases/tag/v1.1.2) and download the relevant package for your machine.
+
+To install a different version of the Illumina InterOp tools, go to http://illumina.github.io/interop/install.html and click "Latest Release" under the **Download Binary** heading, then download the relevant package for your machine.
+
+Unarchive the downloaded package as per your system. The `summary` file is located at `interop/bin/summary`.
+
 ### Testing
-Unit.js was used for testing the illuminaToJSON file to make sure the correct numbers are still retrieved when the version of the illumina applications change
 
-Firstly, there is a test/summaryData.csv file that used version 1.0.8 of the illumina scripts to generate it. If you want to run the test on the new version, generate the summary file for the 150312_NS500507_0027_AH2KJ5AFXX test run and store it in place of this file. This run is found in the basespace directory under test data.
+Unit.js was used for testing the `csvToJson` methods to make sure the correct numbers are still retrieved when the version of the Illumina applications change. If you have downloaded a different version of the Illumina InterOp applications, you'll want to confirm that the `csvToJson` methods still work.
 
-Next install the testing modules within package.json and then run the test:
+Firstly, there is a `test/miseqSummaryData.csv` file that used version 1.1.2 of the Illumina InterOp `summary` application to generate it. If you want to run the test on the new version, generate the summary file for the [130417_M00146_0021_000000000-A2WDF](https://github.com/TGAC/miso-lims/tree/develop/runscanner/src/test/resources/illumina/130417_M00146_0021_000000000-A2WDF) run and store it in place of this file.
+
+Run the tests:
 
 ```
-
-npm install
 npm test
 ```
-Expect to pass 5 tests
 
----
-### Example
-Here is a sample part of the original illumina output:
+#### Dev notes
 
-```
-# Version: v1.0.8
- Level           Yield           Projected Yield Aligned         Error Rate      Intensity C1    %>=Q30         
- Read 1          31.29           31.29           0.00            0.00            5161            83.40          
- Read 2 (I)      1.46            1.46            0.00            0.00            3206            92.19          
- Read 3 (I)      1.46            1.46            0.00            0.00            2845            93.00          
- Read 4          31.26           31.26           0.00            0.00            4289            78.47          
- Non-indexed     62.55           62.55           0.00            0.00            4725            80.94          
- Total           65.47           65.47           0.00            0.00            3875            81.46          
-
-
-Read 1
- Lane            Tiles           Density         Cluster PF      Phas/Prephas    Reads           Reads PF        %>=Q30          Yield           Cycles Error    Aligned         Error           Error (35)      Error (75)      Error (100)     Intensity C1   
- 1               72              306 +/- 10      78.39 +/- 5.62  0.185 / 0.120   66.23           51.97           82.78           7.79            0               0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   5363 +/- 525   
- 2               72              303 +/- 6       79.34 +/- 6.00  0.174 / 0.126   65.50           52.01           83.15           7.79            0               0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   5540 +/- 533   
- 3               72              306 +/- 5       79.82 +/- 3.91  0.179 / 0.112   66.11           52.79           84.20           7.91            0               0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   5079 +/- 360   
- 4               72              301 +/- 9       79.82 +/- 3.43  0.167 / 0.116   65.10           52.02           83.46           7.80            0               0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   0.00 +/- 0.00   4662 +/- 230  
-
- ...
-
-```
-The JSON would then look like this:
-
-```
-{
-   "run_name": "150312_NS500507_0027_AH2KJ5AFXX",
-   "r1_yield":31.29,
-   "r1_projected_yield":31.29,
-   "r1_aligned":0,
-   "r1_error_rate":0,
-   "r1_intensity_c1":5161,
-   "r1_pct_gte_q30":83.4,
-   "r2_yield":31.26,
-   "r2_projected_yield":31.26,
-   "r2_aligned":0,
-   "r2_error_rate":0,
-   "r2_intensity_c1":4289,
-   "r2_pct_gte_q30":78.47,
-   "lanes":[
-      {
-         "lane":1,
-         "r1_tiles":72,
-         "r1_density":306,
-         "r1_density_sd":10,
-         "r1_cluster_pf":78.39,
-         "r1_cluster_pf_sd":5.62,
-         "r1_phasing":0.185,
-         "r1_prephasing":0.12,
-         "r1_reads":66.23,
-         "r1_reads_pf":51.97,
-         "r1_pct_gte_q30":82.78,
-         "r1_yield":7.79,
-         "r1_cycles_error":0,
-         "r1_aligned":0,
-         "r1_aligned_sd":0,
-         "r1_error":5363,
-         "r1_error_sd":525,
-         "r2_tiles":72,
-         "r2_density":306,
-         "r2_density_sd":10,
-         "r2_cluster_pf":78.39,
-         "r2_cluster_pf_sd":5.62,
-         "r2_phasing":0.223,
-         "r2_prephasing":0.147,
-         "r2_reads":66.23,
-         "r2_reads_pf":51.97,
-         "r2_pct_gte_q30":78.23,
-         "r2_yield":7.78,
-         "r2_cycles_error":0,
-         "r2_aligned":0,
-         "r2_aligned_sd":0,
-         "r2_error":4479,
-         "r2_error_sd":579
-      },
-
- ...
-
-```
+This project uses

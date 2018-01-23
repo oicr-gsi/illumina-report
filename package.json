@@ -6,11 +6,13 @@
   "main": "test/testJSON.js",
   "scripts": {
     "test": "mocha --exit",
-    "pretty-quick": "pretty-quick --single-quote: true"
+    "pretty-quick": "pretty-quick",
+    "eslint-check":
+      "eslint --print-config .eslintrc | eslint-config-prettier-check"
   },
   "husky": {
     "hooks": {
-      "precommit": "pretty-quick --staged",
+      "pre-commit": "npm run eslint-check && npm run pretty-quick --staged",
       "pre-push": "npm run test"
     }
   },
@@ -22,6 +24,8 @@
     "fs": "~0.0.2"
   },
   "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-prettier": "^2.9.0",
     "husky": "^0.15.0-rc.3",
     "mocha": "^4.1.0",
     "prettier": "^1.10.2",
