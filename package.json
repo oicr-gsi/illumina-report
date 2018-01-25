@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "description": "",
-  "main": "test/testJSON.js",
+  "main": "illuminaCsvToJson.js",
   "scripts": {
+    "convert": "illuminaCsvToJson.js",
     "test": "mocha --exit",
     "pretty-quick": "pretty-quick",
     "eslint-check":
@@ -12,18 +13,18 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run eslint-check && npm run pretty-quick --staged",
+      "pre-commit": "npm run pretty-quick --staged",
       "pre-push": "npm run test"
     }
   },
-  "author": "",
-  "license": "BSD-2-Clause",
+  "author": "Genome Sequence Informatics",
+  "license": "MIT",
   "dependencies": {
     "JSON": "~1.0.0",
-    "csv-parse": "^2.0.0",
-    "fs": "~0.0.2"
+    "csv-parse": "^2.0.0"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.16.0",
     "eslint-config-prettier": "^2.9.0",
     "husky": "^0.15.0-rc.3",
