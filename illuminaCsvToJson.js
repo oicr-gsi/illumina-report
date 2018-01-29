@@ -2,6 +2,7 @@
 
 const JSON = require('JSON');
 const fs = require('fs');
+const { promisify } = require('util');
 const converter = require('./getMetrics');
 
 const runCsv = process.argv[2];
@@ -14,8 +15,9 @@ async function transform() {
     // may get the run CSV as a file path or as the entire text of the CSV.
     // gracefully handle both
     let parsed;
+    const readFile = promisify(fs.readFile);
     if (fs.existsSync(runCsv)) {
-      const file = fs.readFileSync(runCsv, 'utf8');
+      const file = await readFile(runCsv, 'utf8');
       parsed = await converter.readCsv(file);
     } else {
       parsed = await converter.readCsv(runCsv);

@@ -6,6 +6,8 @@
 process.env.NODE_ENV = 'test';
 
 const fs = require('fs');
+const { promisify } = require('util');
+const readFile = promisify(fs.readFile);
 const JSON = require('JSON');
 
 const chai = require('chai');
@@ -16,15 +18,14 @@ const nextseqPath = './test/nextseqSummaryData.csv';
 
 describe('convert illumina output to json', () => {
   // checks that the test is properly set up: the illumina summary file is present withing the test directory
-  before('illumina file present', done => {
-    const summary = fs.readFileSync('./test/miseqSummaryData.csv', 'utf8');
+  before('illumina file present', async () => {
+    const summary = await readFile('./test/miseqSummaryData.csv', 'utf8');
     expect(summary).to.not.be.empty;
     expect(fs.existsSync(nextseqPath)).to.be.true;
-    done();
   });
   // using parseInt on a blank field, or one that contains letters will result in a null value
   it('no null fields', async () => {
-    const summary = fs.readFileSync(miseqPath, 'utf8');
+    const summary = await readFile(miseqPath, 'utf8');
     const csvAsCells = await makeJson.readCsv(summary);
     const summaryObject = await makeJson.makeObject(csvAsCells);
     const jsonString = JSON.stringify(summaryObject);
@@ -32,7 +33,7 @@ describe('convert illumina output to json', () => {
   });
   // MiSeq information is correct
   it('MiSeq summary information matches', async function() {
-    const summary = fs.readFileSync(miseqPath, 'utf8');
+    const summary = await readFile(miseqPath, 'utf8');
     const csvAsCells = await makeJson.readCsv(summary);
     const summaryObject = await makeJson.makeObject(csvAsCells);
     expect(summaryObject).to.have.property(
@@ -63,7 +64,7 @@ describe('convert illumina output to json', () => {
   });
   // NextSeq information is correct
   it('NextSeq summary information matches', async function() {
-    const summary = fs.readFileSync(nextseqPath, 'utf8');
+    const summary = await readFile(nextseqPath, 'utf8');
     const csvAsCells = await makeJson.readCsv(summary);
     const summaryObject = await makeJson.makeObject(csvAsCells);
     expect(summaryObject).to.have.property(
