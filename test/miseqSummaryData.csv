@@ -1,0 +1,20 @@
+# Version: v1.1.2
+130417_M00146_0021_000000000-A2WDF
+Level          ,Yield          ,Projected Yield,Aligned        ,Error Rate     ,Intensity C1   ,%>=Q30         
+Read 1         ,1.20           ,1.20           ,0.00           ,nan            ,201            ,95.59          
+Read 2         ,1.20           ,1.20           ,0.00           ,nan            ,197            ,94.09          
+Non-indexed    ,2.41           ,2.41           ,0.00           ,nan            ,199            ,94.84          
+Total          ,2.41           ,2.41           ,0.00           ,nan            ,199            ,94.84          
+Read 1
+Lane           ,Surface        ,Tiles          ,Density        ,Cluster PF     ,Legacy Phasing/Prephasing Rate,Phasing  slope/offset,Prephasing slope/offset,Reads          ,Reads PF       ,%>=Q30         ,Yield          ,Cycles Error   ,Aligned        ,Error          ,Error (35)     ,Error (75)     ,Error (100)    ,Intensity C1   
+1              ,-              ,28             ,597 +/- 13     ,93.31 +/- 0.35 ,0.145 / 0.170  ,nan / nan      ,nan / nan      ,10.76          ,10.04          ,95.59          ,1.20           ,0              ,0.00 +/- 0.00  ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,201 +/- 25     
+1              ,1              ,14             ,607 +/- 7      ,93.00 +/- 0.13 ,0.151 / 0.167  ,nan / nan      ,nan / nan      ,5.46           ,5.08           ,95.78          ,0.61           ,-              ,0.00 +/- 0.00  ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,225 +/- 6      
+1              ,2              ,14             ,587 +/- 10     ,93.61 +/- 0.18 ,0.139 / 0.173  ,nan / nan      ,nan / nan      ,5.30           ,4.96           ,95.38          ,0.60           ,-              ,0.00 +/- 0.00  ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,178 +/- 5      
+Read 2
+Lane           ,Surface        ,Tiles          ,Density        ,Cluster PF     ,Legacy Phasing/Prephasing Rate,Phasing  slope/offset,Prephasing slope/offset,Reads          ,Reads PF       ,%>=Q30         ,Yield          ,Cycles Error   ,Aligned        ,Error          ,Error (35)     ,Error (75)     ,Error (100)    ,Intensity C1   
+1              ,-              ,28             ,597 +/- 13     ,93.31 +/- 0.35 ,0.191 / 0.453  ,nan / nan      ,nan / nan      ,10.76          ,10.04          ,94.09          ,1.20           ,0              ,0.00 +/- 0.00  ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,197 +/- 33     
+1              ,1              ,14             ,607 +/- 7      ,93.00 +/- 0.13 ,0.214 / 0.464  ,nan / nan      ,nan / nan      ,5.46           ,5.08           ,94.42          ,0.61           ,-              ,0.00 +/- 0.00  ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,224 +/- 18     
+1              ,2              ,14             ,587 +/- 10     ,93.61 +/- 0.18 ,0.167 / 0.442  ,nan / nan      ,nan / nan      ,5.30           ,4.96           ,93.75          ,0.60           ,-              ,0.00 +/- 0.00  ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,nan +/- nan    ,170 +/- 20     
+Extracted: 242
+Called: 242
+Scored: 242
