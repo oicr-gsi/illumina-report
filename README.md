@@ -18,19 +18,17 @@ $ npm install
 ### How to get JSON summary metrics from a run directory
 
 The `illumina_summary_tool` outputs its report in CSV format to STDOUT.
-The `illuminaCsvToJson.js` script takes one parameter, which can be either a file path for the saved output of using the `illumina_summary_tool`, or it can be the output of the summary tool itself.
+The `illuminaCsvToJson.js` script takes one parameter, a file path for the output of using the `illumina_summary_tool`.
 
-First method (file path parameter):
+```
+$ node illuminaCsvToJson.js <(./illumina_summary_tool /path/to/run/folder)
+```
+
+or, if you need to store the CSV output:
 
 ```
 $ ./illumina_summary_tool /path/to/run/folder > /new/location/runSummary.csv
 $ node illuminaCsvToJson.js /new/location/runSummary.csv
-```
-
-Second method (summary tool output parameter):
-
-```
-$ node illuminaCsvToJson.js "$(./illumina_summary_tool /path/to/run/folder)"
 ```
 
 In both cases, the `illuminaCsvToJson.js` script outputs its results to STDOUT.
